@@ -39,3 +39,39 @@ document.addEventListener("DOMContentLoaded", () => {
     hiddenElements.forEach((el) => observerfoto.observe(el));
 });
 
+
+//saiba mais da galerinha
+
+let perfis = document.querySelectorAll('.team-photo');
+let main = document.querySelector('main');
+
+
+perfis.forEach(perfil => {
+    perfil.addEventListener('click', () => {
+       
+        let existingCard = document.querySelector('.profile-card');
+        if (existingCard) existingCard.remove();
+
+        
+        let informacao = document.createElement('div');
+        informacao.classList.add('profile-card');
+
+        
+        informacao.innerHTML = `
+            <h2>${perfil.dataset.name}</h2>
+            <h4>${perfil.dataset.role}</h4>
+            <p>${perfil.dataset.description}</p>
+            <img src = "${perfil.dataset.img}" "alt=${perfil.dataset.name}" class= "profile-photo" />
+            <button class="close-btn">Fechar</button>
+        `;
+
+        
+        main.appendChild(informacao);
+
+       
+        let closeButton = informacao.querySelector('.close-btn');
+        closeButton.addEventListener('click', () => {
+            informacao.remove();
+        });
+    });
+});
